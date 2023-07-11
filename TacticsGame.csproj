@@ -20,7 +20,6 @@
     <PackageReference Include="Raylib-cs" Version="4.5.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Source\" />
     <Folder Include="Source\Models\" />
     <Folder Include="Source\Interfaces\" />
     <Folder Include="Source\GameManagers\" />

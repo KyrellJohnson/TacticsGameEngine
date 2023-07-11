@@ -30,7 +30,8 @@ namespace TacticsGame.Source.Scenes
 
         public void Update()
         {
-            if(Game.inputManager.LEFT_CLICK_LAST_FRAME)
+            if(Game.inputManager.LEFT_CLICK_LAST_FRAME
+                && gameStartButton.WasClicked())
             {
                 Console.WriteLine("clicked");
 

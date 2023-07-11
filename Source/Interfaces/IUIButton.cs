@@ -5,6 +5,7 @@ namespace TacticsGame.Source.Interfaces
     {
         public void OnClick();
         public void SetCenterPivot();
+        public void WasClicked();
     }
 }
 
