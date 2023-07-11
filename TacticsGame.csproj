@@ -7,4 +7,24 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Raylib-cs" />
+    <None Remove="Source\" />
+    <None Remove="Source\Models\" />
+    <None Remove="Source\Interfaces\" />
+    <None Remove="Source\GameManagers\" />
+    <None Remove="Source\Scenes\" />
+    <None Remove="Source\UserInterface\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Raylib-cs" Version="4.5.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\" />
+    <Folder Include="Source\Models\" />
+    <Folder Include="Source\Interfaces\" />
+    <Folder Include="Source\GameManagers\" />
+    <Folder Include="Source\Scenes\" />
+    <Folder Include="Source\UserInterface\" />
+  </ItemGroup>
 </Project>
