@@ -30,11 +30,11 @@ namespace TacticsGame.Source.UserInterface
             position = new IntVector2(position.X - size.X / 2, position.Y - size.Y / 2);
         }
 
-        public bool WasClicked()
+        public bool WasClicked(IntVector2 mousePos)
         {
-            return MathUtils.PointInRectangle(
-                x1: position.X-size.Y,
-                y1: position.X-size.X);
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(position.X, position.Y, size.X, size.Y);
+
+            return MathUtils.RectangleContainsPoint(rectangle, mousePos);
         }
     }
 

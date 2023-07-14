@@ -31,10 +31,9 @@ namespace TacticsGame.Source.Scenes
         public void Update()
         {
             if(Game.inputManager.LEFT_CLICK_LAST_FRAME
-                && gameStartButton.WasClicked())
+                && gameStartButton.WasClicked(new IntVector2 (Game.inputManager.mousePosition)))
             {
-                Console.WriteLine("clicked");
-
+                gameStartButton.OnClick();
             }
         }
 

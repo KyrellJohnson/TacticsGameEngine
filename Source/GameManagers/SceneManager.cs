@@ -7,7 +7,7 @@ namespace TacticsGame.Source.GameManagers
     public class SceneManager
     {
         // Generate a list of all scenese within the game
-        public List<IScene> allScenes = new List<IScene>();
+        public static Dictionary<string, IScene> allScenes = new Dictionary<string, IScene>();
 
         // Set Current Scene
         public IScene currentScene { get; set; }
@@ -18,12 +18,21 @@ namespace TacticsGame.Source.GameManagers
         /// </summary>
         public SceneManager()
         {
-            allScenes.Add(new SplashScreen());
-            
+            allScenes.Add("Splash", new SplashScreen());
+            allScenes.Add("Main", new MainGame());
 
-            currentScene = allScenes.First();
+            currentScene = allScenes["Splash"];
         }
 
+        public void ChangeScene(string scene)
+        {
+            currentScene = allScenes[scene];
+        }
+
+        public string GetCurrentSceneName()
+        {
+            return allScenes.First(x => x.Value == currentScene).Key;
+        }
 
     }
 }

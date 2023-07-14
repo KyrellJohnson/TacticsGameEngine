@@ -37,6 +37,7 @@ namespace TacticsGame
                 Raylib.BeginDrawing();
                 Raylib.DrawFPS(10, 10);
                 Raylib.DrawText($"UP KEY: {inputManager.UP_ACTION_KEY_PRESSED.ToString()}", 40, 40, 20, Color.RED);
+                Raylib.DrawText($"SCENE: {sceneManager.GetCurrentSceneName()}", 200, 40, 12, Color.RED);
 
                 sceneManager.currentScene.Draw();
 

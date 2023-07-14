@@ -15,9 +15,14 @@
     <None Remove="Source\GameManagers\" />
     <None Remove="Source\Scenes\" />
     <None Remove="Source\UserInterface\" />
+    <None Remove="Assets\" />
+    <None Remove="Assets\Tilesets\" />
+    <None Remove="Assets\Tilemaps\" />
+    <None Remove="TiledCS" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Raylib-cs" Version="4.5.0.2" />
+    <PackageReference Include="TiledCS" Version="3.3.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source\Models\" />
@@ -25,5 +30,19 @@
     <Folder Include="Source\GameManagers\" />
     <Folder Include="Source\Scenes\" />
     <Folder Include="Source\UserInterface\" />
+    <Folder Include="Assets\" />
+    <Folder Include="Assets\Tilesets\" />
+    <Folder Include="Assets\Tilemaps\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
