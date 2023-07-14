@@ -13,9 +13,14 @@ namespace TacticsGame.Source.GameManagers
         public TilemapManager()
         {
             LoadInTileMaps();
+            DrawTileMap();
+            
+        }
 
+        public void DrawTileMap()
+        {
             //TODO: Draw
-            foreach(var layer in tileLayers)
+            foreach (var layer in tileLayers)
             {
                 for (var y = 0; y < layer.height; y++)
                 {
@@ -43,17 +48,22 @@ namespace TacticsGame.Source.GameManagers
                         var rect = maps["tilemap"].GetSourceRect(mapTileset, tileset, gid);
 
                         // Render sprite at position tileX, tileY using the rect
-                        Raylib.DrawRectangle(rect.x, rect.y, rect.width, rect.height, Color.GOLD);
+                        //Raylib.DrawRectangle(rect.x, rect.y, rect.width, rect.height, new Color());
+                        Console.WriteLine(tileset.Image.source);
+
+                        Texture2D texture = Raylib.LoadTexture("../../../Assets/tileset x1.png");
+                        Rectangle sourceRec = new Rectangle( 0.0f, 0.0f, (float)texture.width, (float)texture.height );
+
+                        Raylib.DrawTexturePro(texture, sourceRec, new Rectangle(rect.x, rect.y, rect.width, rect.height), new System.Numerics.Vector2(texture.width, texture.height), 0f, Color.GRAY);
                     }
                 }
             }
-            
         }
 
         public void LoadInTileMaps()
         {
-            maps.Add("tilemap", new TiledMap(@"../../Assets/Tilemaps/Level_Main.tmx"));
-            tilesets = (maps["tilemap"].GetTiledTilesets("../../Assets/Tilesets/"));
+            maps.Add("tilemap", new TiledMap("../../../Assets/Tilemaps/Level_Main.tmx"));
+            tilesets = (maps["tilemap"].GetTiledTilesets("../../../Assets/Tilesets/"));
             tileLayers = maps["tilemap"].Layers.Where(x => x.type == TiledLayerType.TileLayer);
 
         }

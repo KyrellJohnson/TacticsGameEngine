@@ -6,14 +6,17 @@ namespace TacticsGame.Source.Scenes
 {
     public class MainGame : IScene
     {
+        TilemapManager tileMap;
+
         public MainGame()
         {
             DrawTileMap();
-            TilemapManager n = new TilemapManager();
+            tileMap = new TilemapManager();
         }
 
         public void Draw()
         {
+           // tileMap.DrawTileMap();
             //throw new NotImplementedException();
         }
 
