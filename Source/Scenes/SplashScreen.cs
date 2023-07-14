@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Numerics;
 using Raylib_cs;
-using TacticsGame.Source.Interfaces;
-using TacticsGame.Source.Models;
+using TacticsGame.Engine.Interfaces;
+using TacticsGame.Engine.Models;
 using TacticsGame.Source.UserInterface;
+using TacticsGame.Engine.Models.UIElements;
+
 
 namespace TacticsGame.Source.Scenes
 {
@@ -16,7 +18,7 @@ namespace TacticsGame.Source.Scenes
         public SplashScreen()
         {
             gameStartButton = new GameStartButton(new IntVector2(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2),
-                new IntVector2(300, 120), Color.BLACK);
+                new IntVector2(300, 120), Color.BLACK, new UIText("Start Game", Color.RED, new IntVector2(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2), 20));
             gameStartButton.SetCenterPivot();
         }
 
@@ -40,6 +42,13 @@ namespace TacticsGame.Source.Scenes
         public void StartGameUI()
         {
             Raylib.DrawRectangle(gameStartButton.position.X, gameStartButton.position.Y, gameStartButton.size.X, gameStartButton.size.Y, gameStartButton.color); ;
+            gameStartButton.text.DrawText();
+            gameStartButton.text.SetCenterPivot(gameStartButton.size.X, gameStartButton.size.Y);
+        }
+
+        public void Initalize()
+        {
+            //throw new NotImplementedException();
         }
     }
 }

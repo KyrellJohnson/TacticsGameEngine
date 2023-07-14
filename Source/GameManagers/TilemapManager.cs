@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Numerics;
 using TiledCS;
 using Raylib_cs;
 
@@ -9,12 +9,15 @@ namespace TacticsGame.Source.GameManagers
         public static Dictionary<string, TiledMap> maps = new Dictionary<string, TiledMap>();
         public static Dictionary<int, TiledTileset> tilesets = new Dictionary<int, TiledTileset>();
         public static IEnumerable<TiledLayer>? tileLayers;
-
+        private Texture2D tilesetTexture;
         public TilemapManager()
         {
             LoadInTileMaps();
+        }
+
+        public void Draw()
+        {
             DrawTileMap();
-            
         }
 
         public void DrawTileMap()
@@ -49,14 +52,16 @@ namespace TacticsGame.Source.GameManagers
 
                         // Render sprite at position tileX, tileY using the rect
                         //Raylib.DrawRectangle(rect.x, rect.y, rect.width, rect.height, new Color());
-                        Console.WriteLine(tileset.Image.source);
+                        //Console.WriteLine(rect);
 
-                        Texture2D texture = Raylib.LoadTexture("../../../Assets/tileset x1.png");
-                        Rectangle sourceRec = new Rectangle( 0.0f, 0.0f, (float)texture.width, (float)texture.height );
 
-                        Raylib.DrawTexturePro(texture, sourceRec, new Rectangle(rect.x, rect.y, rect.width, rect.height), new System.Numerics.Vector2(texture.width, texture.height), 0f, Color.GRAY);
+                        var source = new Rectangle(rect.x, rect.y, rect.width, rect.height);
+                        var dest = new Rectangle(tileX, tileY, maps["tilemap"].TileWidth, maps["tilemap"].TileHeight);
+
+                        Raylib.DrawTexturePro(tilesetTexture, source, dest, Vector2.Zero, 0f, Color.GRAY);
                     }
                 }
+               // Console.WriteLine(layer.height * layer.width);
             }
         }
 
@@ -65,7 +70,7 @@ namespace TacticsGame.Source.GameManagers
             maps.Add("tilemap", new TiledMap("../../../Assets/Tilemaps/Level_Main.tmx"));
             tilesets = (maps["tilemap"].GetTiledTilesets("../../../Assets/Tilesets/"));
             tileLayers = maps["tilemap"].Layers.Where(x => x.type == TiledLayerType.TileLayer);
-
+            tilesetTexture = Raylib.LoadTexture("../../../Assets/tileset x1.png");
         }
     }
 }

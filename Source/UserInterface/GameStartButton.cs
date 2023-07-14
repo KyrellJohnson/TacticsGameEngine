@@ -1,8 +1,6 @@
-﻿using System;
-using System.Numerics;
-using Raylib_cs;
-using TacticsGame.Source.Interfaces;
-using TacticsGame.Source.Models;
+﻿using Raylib_cs;
+using TacticsGame.Engine.Models;
+using TacticsGame.Engine.Models.UIElements;
 
 namespace TacticsGame.Source.UserInterface
 {
@@ -11,6 +9,10 @@ namespace TacticsGame.Source.UserInterface
         public GameStartButton(IntVector2 position, IntVector2 size, Color color) : base(position, size, color)
         {
             
+        }
+
+        public GameStartButton(IntVector2 position, IntVector2 size, Color color, UIText text) : base(position, size, color, text)
+        {
         }
 
         public new void OnClick()

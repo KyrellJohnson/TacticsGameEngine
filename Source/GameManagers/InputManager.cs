@@ -12,8 +12,11 @@ namespace TacticsGame.Source.GameManagers
         public bool DOWN_ACTION_KEY_PRESSED { get; private set; }
 
         public bool LEFT_CLICK_LAST_FRAME { get; private set; }
+        public bool RIGHT_CLICK_LAST_FRAME { get; private set; }
 
         public Vector2 mousePosition;
+        public Vector2 mouseDelta;
+        public float mouseWheel;
 
         KeyboardKey UpKey = KeyboardKey.KEY_W;
         KeyboardKey DownKey = KeyboardKey.KEY_S;
@@ -21,6 +24,7 @@ namespace TacticsGame.Source.GameManagers
         KeyboardKey RightKey = KeyboardKey.KEY_D;
 
         MouseButton leftClick = MouseButton.MOUSE_BUTTON_LEFT;
+        MouseButton rightClick = MouseButton.MOUSE_BUTTON_RIGHT;
 
         public void GetAllInput()
         {
@@ -44,11 +48,19 @@ namespace TacticsGame.Source.GameManagers
             else
                 RIGHT_ACTION_KEY_PRESSED = false;
 
-            mousePosition = Raylib.GetMousePosition();
 
             if (Raylib.IsMouseButtonPressed(leftClick))
                 LEFT_CLICK_LAST_FRAME = true;
-            
+
+            if(Raylib.IsMouseButtonDown(rightClick))
+                RIGHT_CLICK_LAST_FRAME = true;
+            else if(!Raylib.IsMouseButtonDown(rightClick))
+                RIGHT_CLICK_LAST_FRAME= false;
+
+            mousePosition = Raylib.GetMousePosition();
+            mouseDelta = Raylib.GetMouseDelta();
+            mouseWheel = Raylib.GetMouseWheelMove();
+
         }
 
         public void ResetInput()

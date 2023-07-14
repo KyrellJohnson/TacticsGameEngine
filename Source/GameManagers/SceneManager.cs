@@ -1,5 +1,5 @@
 ﻿using System;
-using TacticsGame.Source.Interfaces;
+using TacticsGame.Engine.Interfaces;
 using TacticsGame.Source.Scenes;
 
 namespace TacticsGame.Source.GameManagers
@@ -27,6 +27,7 @@ namespace TacticsGame.Source.GameManagers
         public void ChangeScene(string scene)
         {
             currentScene = allScenes[scene];
+            currentScene.Initalize();
         }
 
         public string GetCurrentSceneName()

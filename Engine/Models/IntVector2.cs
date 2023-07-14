@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Numerics;
 
-namespace TacticsGame.Source.Models
+namespace TacticsGame.Engine.Models
 {
     public struct IntVector2
     {
-        public int X;
-        public int Y;
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public IntVector2(int X, int Y)
         {
@@ -17,8 +17,8 @@ namespace TacticsGame.Source.Models
 
         public IntVector2(Vector2 vector2)
         {
-            this.X = (int)vector2.X;
-            this.Y = (int)vector2.Y;
+            X = (int)vector2.X;
+            Y = (int)vector2.Y;
         }
     }
 }

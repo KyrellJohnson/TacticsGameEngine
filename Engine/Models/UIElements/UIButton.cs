@@ -1,23 +1,29 @@
 ﻿using Raylib_cs;
-using System;
-using System.Numerics;
-using TacticsGame.Source.Interfaces;
-using TacticsGame.Source.Models;
-using TacticsGame.Source.Utilities;
+using TacticsGame.Engine.Interfaces;
+using TacticsGame.Engine.Utilities;
 
-namespace TacticsGame.Source.UserInterface
+namespace TacticsGame.Engine.Models.UIElements
 {
     public class UIButton : IUIButton
     {
         public IntVector2 position { get; private set; }
         public IntVector2 size { get; private set; }
         public Color color { get; private set; }
+        public UIText text { get; private set; }
 
         public UIButton(IntVector2 position, IntVector2 size, Color color)
         {
             this.position = position;
             this.size = size;
             this.color = color;
+        }
+
+        public UIButton(IntVector2 position, IntVector2 size, Color color, UIText text)
+        {
+            this.position = position;
+            this.size = size;
+            this.color = color;
+            this.text = text;
         }
 
         public void OnClick()

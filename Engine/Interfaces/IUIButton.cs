@@ -1,7 +1,7 @@
 ﻿using System;
-using TacticsGame.Source.Models;
+using TacticsGame.Engine.Models;
 
-namespace TacticsGame.Source.Interfaces
+namespace TacticsGame.Engine.Interfaces
 {
     public interface IUIButton
     {
