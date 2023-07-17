@@ -28,10 +28,10 @@ namespace TacticsGame.Engine.Models.UIElements
             Raylib.DrawText(Text, Position.X, Position.Y, FontSize, Color);
         }
 
-        public void SetCenterPivot(int recW, int recY)
+        public void SetCenterPivot()
         {
             int textWidth = Raylib.MeasureText(Text, FontSize);
-            Position = new IntVector2(Position.X - textWidth / 2, Position.Y);
+            Position = new IntVector2(Position.X - textWidth / 2, Position.Y - FontSize/2);
         }
     }
 }

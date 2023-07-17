@@ -16,7 +16,7 @@ namespace TacticsGame.Engine.Interfaces
         public int FontSize { get; set; }
 
         public void DrawText();
-        public void SetCenterPivot(int recW, int recY);
+        public void SetCenterPivot();
 
     }
 }

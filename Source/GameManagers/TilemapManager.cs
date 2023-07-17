@@ -13,6 +13,14 @@ namespace TacticsGame.Source.GameManagers
         public TilemapManager()
         {
             LoadInTileMaps();
+            foreach(var layer in tileLayers)
+            {
+                var properties = layer.properties;
+                for(int i = 0; i < properties.Length; i++)
+                {
+                    Console.WriteLine(properties[i].name);
+                }
+            }
         }
 
         public void Draw()
@@ -39,6 +47,8 @@ namespace TacticsGame.Source.GameManagers
                         {
                             continue;
                         }
+
+                        
 
                         // Helper method to fetch the right TieldMapTileset instance. 
                         // This is a connection object Tiled uses for linking the correct tileset to the gid value using the firstgid property.

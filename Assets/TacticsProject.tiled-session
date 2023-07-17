@@ -29,6 +29,7 @@
         "Tilemaps/Level_Main.tmx"
     ],
     "project": "TacticsProject.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "Tilesets/SciFi_Tileset.tsx",
         "Tilemaps/Level_Main.tmx"
