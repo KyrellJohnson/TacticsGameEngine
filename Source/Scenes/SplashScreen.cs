@@ -18,17 +18,14 @@ namespace TacticsGame.Source.Scenes
         public SplashScreen()
         {
             gameStartButton = new GameStartButton(new IntVector2(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2),
-                new IntVector2(300, 120), Color.BLACK, new UIText("Start Game", Color.RED, new IntVector2(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2), 20));
+                new IntVector2(300, 120), Color.BLACK, new UIText("Start Game", Color.WHITE, new IntVector2(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2), 20));
             gameStartButton.SetCenterPivot();
-            gameStartButton.text.SetCenterPivot();
+            gameStartButton.text!.SetCenterPivot();
         }
 
         public void Draw()
         {
-            //TODO: Draw Button UI for Starting Game
             StartGameUI();
-
-            //TODO: Draw Button UI for Quitting Game
         }
 
         public void Update()
@@ -42,8 +39,7 @@ namespace TacticsGame.Source.Scenes
 
         public void StartGameUI()
         {
-            Raylib.DrawRectangle(gameStartButton.position.X, gameStartButton.position.Y, gameStartButton.size.X, gameStartButton.size.Y, gameStartButton.color); ;
-            gameStartButton.text.DrawText();
+            gameStartButton.DrawButton(withText: true);
         }
 
         public void Initalize()

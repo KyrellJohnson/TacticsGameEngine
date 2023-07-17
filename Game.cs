@@ -34,22 +34,22 @@ namespace TacticsGame
 
                 //Draw
                 Raylib.BeginDrawing();
-                Raylib.ClearBackground(Color.WHITE);
+                Raylib.ClearBackground(Color.LIGHTGRAY);
 
                 sceneManager.currentScene.Draw();
 
-
+#if DEBUG
                 Raylib.DrawFPS(10, 10);
                 Raylib.DrawText($"UP KEY: {inputManager.UP_ACTION_KEY_PRESSED.ToString()}", 40, 40, 20, Color.RED);
-                Raylib.DrawText($"SCENE: {sceneManager.GetCurrentSceneName()}", 200, 40, 12, Color.RED);
-                Raylib.DrawText($"RIGHT CLICK KEY: {inputManager.RIGHT_CLICK_LAST_FRAME.ToString()}", 40, 140, 20, Color.RED);
+                Raylib.DrawText($"DOWN KEY: {inputManager.DOWN_ACTION_KEY_PRESSED.ToString()}", 40, 80, 20, Color.RED);
+                Raylib.DrawText($"LEFT KEY: {inputManager.LEFT_ACTION_KEY_PRESSED.ToString()}", 40, 120, 20, Color.RED);
+                Raylib.DrawText($"RIGHT KEY: {inputManager.RIGHT_ACTION_KEY_PRESSED.ToString()}", 40, 160, 20, Color.RED);
+                Raylib.DrawText($"RIGHT CLICK: {inputManager.RIGHT_CLICK_LAST_FRAME.ToString()}", 40, 200, 20, Color.RED);
+                Raylib.DrawText($"LEFT CLICK: {inputManager.LEFT_CLICK_LAST_FRAME.ToString()}", 40, 240, 20, Color.RED);
 
-
+#endif
                 Raylib.EndDrawing();
                 //**
-
-                inputManager.ResetInput();
-
 
             }
         }

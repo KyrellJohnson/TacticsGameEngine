@@ -25,7 +25,7 @@
     <PackageReference Include="TiledCS" Version="3.3.3" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Source\GameManagers\" />
+    <Folder Include="Source\Entities\Controllers\" />
     <Folder Include="Source\Scenes\" />
     <Folder Include="Source\UserInterface\" />
     <Folder Include="Assets\" />

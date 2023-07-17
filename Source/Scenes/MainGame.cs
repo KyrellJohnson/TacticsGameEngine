@@ -9,15 +9,20 @@ namespace TacticsGame.Source.Scenes
     public class MainGame : IScene
     {
         TilemapManager tileMap;
+        LevelManager levelManager;
         Camera2D camera;
 
         public MainGame()
         {
             tileMap = new TilemapManager();
+            levelManager = new LevelManager();
         }
 
         public void Initalize()
         {
+            tileMap.Initalize(tilemapSrc: "../../../Assets/Tilemaps/Level_Main.tmx", tilesetTextureSrc: "../../../Assets/tileset x1.png", collisionLayerName: "Walls");
+            levelManager.Initalize();
+
             camera = new Camera2D();
             camera.offset = Vector2.Zero;
             camera.zoom = 1f;
@@ -72,6 +77,8 @@ namespace TacticsGame.Source.Scenes
                     camera.zoom -= (wheel * zoomIncrement);
 
             }
+
+            tileMap.camera = camera;
 
         }
     }

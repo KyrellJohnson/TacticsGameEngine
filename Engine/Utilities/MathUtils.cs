@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Numerics;
 using TacticsGame.Engine.Models;
 
 namespace TacticsGame.Engine.Utilities
@@ -18,6 +19,16 @@ namespace TacticsGame.Engine.Utilities
             return rectangle.Contains(new Point(mousePos.X, mousePos.Y));
         }
 
+        public static bool RectangleContainsPoint(Rectangle rectangle, Vector2 mousePos)
+        {
+            return rectangle.Contains(new Point((int)mousePos.X, (int)mousePos.Y));
+        }
+
+        public static bool RectangleContainsPoint(Raylib_cs.Rectangle rectangle, Vector2 mousePos)
+        {
+            Rectangle rec = new Rectangle((int)rectangle.x, (int)rectangle.y, (int)rectangle.width, (int)rectangle.height);
+            return rec.Contains(new Point((int)mousePos.X, (int)mousePos.Y));
+        }
 
     }
 }

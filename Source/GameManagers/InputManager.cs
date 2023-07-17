@@ -49,10 +49,12 @@ namespace TacticsGame.Source.GameManagers
                 RIGHT_ACTION_KEY_PRESSED = false;
 
 
-            if (Raylib.IsMouseButtonPressed(leftClick))
+            if (Raylib.IsMouseButtonDown(leftClick))
                 LEFT_CLICK_LAST_FRAME = true;
+            else if (!Raylib.IsMouseButtonDown(leftClick))
+                LEFT_CLICK_LAST_FRAME = false;
 
-            if(Raylib.IsMouseButtonDown(rightClick))
+            if (Raylib.IsMouseButtonDown(rightClick))
                 RIGHT_CLICK_LAST_FRAME = true;
             else if(!Raylib.IsMouseButtonDown(rightClick))
                 RIGHT_CLICK_LAST_FRAME= false;
