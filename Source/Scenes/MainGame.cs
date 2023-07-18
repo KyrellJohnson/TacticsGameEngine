@@ -50,7 +50,8 @@ namespace TacticsGame.Source.Scenes
             Raylib.DrawText($"POS: {(int)mouseWorldPos.X} | {(int)mouseWorldPos.Y}", 250, 250, 20, Color.RED);
 
             Raylib.EndMode2D();
-            
+
+
         }
 
         public void Update()

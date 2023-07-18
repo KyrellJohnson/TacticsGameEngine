@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Raylib_cs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace TacticsGame.Source.Entities.Models
     public class PlayerUnit
     {
         public string Name { get; set; }
-        public string PlayerSpriteSrc { get; set; }
+        public Texture2D PlayerSprite { get; set; }
         public SpriteSize SpriteSize { get; set; }
         public IntVector2 PlayerPosition { get; set; }
         public List<IntVector2> Movement { get; set; }
@@ -19,7 +20,7 @@ namespace TacticsGame.Source.Entities.Models
         {
             Name = name;
             SpriteSize = spriteSize;
-            PlayerSpriteSrc = "../../../Assets/Sprites/Player_Sprite.png";
+            PlayerSprite = Game.textureManager.playerSprite;
             Movement = new List<IntVector2>();
             Movement.Add(new IntVector2(0, 1));
             Movement.Add(new IntVector2(0, 2));

@@ -17,13 +17,11 @@ namespace TacticsGame.Source.GameManagers
         PlayerUnit[] playerUnits;
         public PlayerUnit selectedUnit;
         Dictionary<Vector2, PlayerUnit> playerPositions;
-        Texture2D playerSprite;
-        public Camera2D camera;
 
+        public Camera2D camera;
         public LevelManager()
         {
             playerPositions = new Dictionary<Vector2, PlayerUnit>();
-            playerSprite = new Texture2D();
         }
 
         public void Initalize()
@@ -38,7 +36,7 @@ namespace TacticsGame.Source.GameManagers
             };
 
             // Set Spawn Locations For Player Units
-            foreach(var player in playerUnits)
+            foreach (var player in playerUnits)
             {
 
                 // find a random spanPoint
@@ -46,23 +44,28 @@ namespace TacticsGame.Source.GameManagers
                 int randIndex = rand.Next(TilemapManager.spawnPoints.Count);
 
                 playerPositions.Add(TilemapManager.spawnPoints.ElementAt(randIndex), player);
-                TilemapManager.spawnPoints.RemoveAt(randIndex);                
+                TilemapManager.spawnPoints.RemoveAt(randIndex);
             }
 
             selectedUnit = playerUnits[0];
-            playerSprite = Raylib.LoadTexture(selectedUnit.PlayerSpriteSrc);
+
+            foreach (var x in selectedUnit.Movement)
+            {
+                Console.WriteLine(x);
+            }
+
         }
 
         public void Update()
         {
             // Get Selected Player
-            if(Game.inputManager.LEFT_CLICK_LAST_FRAME)
+            if (Game.inputManager.LEFT_CLICK_LAST_FRAME)
             {
-                foreach(var player in playerPositions)
+                foreach (var player in playerPositions)
                 {
                     var mousePos = Raylib.GetScreenToWorld2D(Game.inputManager.mousePosition, camera);
 
-                    if (MathUtils.RectangleContainsPoint(new Rectangle(player.Key.X, player.Key.Y, player.Value.SpriteSize.X,player.Value.SpriteSize.Y), mousePos))
+                    if (MathUtils.RectangleContainsPoint(new Rectangle(player.Key.X, player.Key.Y, player.Value.SpriteSize.X, player.Value.SpriteSize.Y), mousePos))
                     {
                         ChangeSelectedUnit(player.Value);
                     }
@@ -72,12 +75,12 @@ namespace TacticsGame.Source.GameManagers
 
         public void Draw()
         {
-            foreach(var player in playerPositions)
+            foreach (var player in playerPositions)
             {
 
                 Rectangle source = new Rectangle(0, 0, 32, 32);
                 Rectangle dest = new Rectangle(player.Key.X, player.Key.Y, 32, 32);
-                Raylib.DrawTexturePro(playerSprite, source, dest, Vector2.Zero, 0f, Color.WHITE);
+                Raylib.DrawTexturePro(player.Value.PlayerSprite, source, dest, Vector2.Zero, 0f, Color.WHITE);
                 player.Value.PlayerPosition = new IntVector2(dest.x, dest.y);
             }
 
@@ -92,28 +95,33 @@ namespace TacticsGame.Source.GameManagers
 
         public void ShowUnitMovement()
         {
-            foreach(var movementPositions in selectedUnit.Movement)
+
+            Vector2[] currentPlayerPositions = playerPositions.Keys.ToArray();
+            Vector2[] colliderPositions = TilemapManager.colliderPositions.ToArray();
+
+            for (int i = 0; i < selectedUnit.Movement.Count; i++)
             {
-                Rectangle moveTile = new Rectangle(selectedUnit.PlayerPosition.X + (movementPositions.X * selectedUnit.SpriteSize.X),
-                    selectedUnit.PlayerPosition.Y + (movementPositions.Y * selectedUnit.SpriteSize.Y),
+                Rectangle moveTile = new Rectangle(selectedUnit.PlayerPosition.X + (selectedUnit.Movement.ElementAt(i).X * selectedUnit.SpriteSize.X),
+                    selectedUnit.PlayerPosition.Y + (selectedUnit.Movement.ElementAt(i).Y * selectedUnit.SpriteSize.Y),
                     selectedUnit.SpriteSize.X, selectedUnit.SpriteSize.Y
                 );
+                Rectangle src = new Rectangle(0, 0, 32, 32);
 
-                foreach(var position in playerPositions)
+                if (!MathUtils.RectangleContainsListOfPoints(moveTile, currentPlayerPositions) && !MathUtils.RectangleContainsListOfPoints(moveTile, colliderPositions))
                 {
-                    //Console.WriteLine(MathUtils.RectangleContainsPoint(moveTile, position.Key));
-                    if (!MathUtils.RectangleContainsPoint(moveTile, position.Key))
-                    {
-                        Raylib.DrawRectangle((int)moveTile.x, (int)moveTile.y, (int)moveTile.width, (int)moveTile.height, Color.DARKGREEN);
-                        //Console.WriteLine(position.Key);
-                    }
-                    else
-                    {
-                        Raylib.DrawRectangle((int)moveTile.x, (int)moveTile.y, (int)moveTile.width, (int)moveTile.height, Color.RED);
-                    }
+                    Raylib.DrawTexturePro(Game.textureManager.movementTileSprite, src, moveTile, Vector2.Zero, 0f, Color.WHITE);
                 }
-                
+                else
+                {
+                    Raylib.DrawTexturePro(Game.textureManager.nonMovementTileSprite, src, moveTile, Vector2.Zero, 0f, Color.WHITE);
+
+                }
             }
+
+
         }
+
+
     }
 }
+

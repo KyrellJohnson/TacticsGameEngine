@@ -7,6 +7,7 @@ namespace TacticsGame
     {
         public static SceneManager sceneManager = new SceneManager();
         public static InputManager inputManager = new InputManager();
+        public static TextureManager textureManager = new TextureManager();
         public void Run()
         {
             // Set Up Start Up Configs

@@ -36,5 +36,18 @@ namespace TacticsGame.Engine.Utilities
             return rec.Contains(new Point((int)position.X, (int)position.Y));
         }
 
+        public static bool RectangleContainsListOfPoints(Raylib_cs.Rectangle rectangle, Vector2[] positions)
+        {
+            for(int i = 0; i < positions.Length; i++)
+            {
+                if(RectangleContainsPoint(rectangle, positions[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
     }
 }
