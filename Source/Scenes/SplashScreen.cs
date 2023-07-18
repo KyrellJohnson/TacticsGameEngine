@@ -3,9 +3,8 @@ using System.Numerics;
 using Raylib_cs;
 using TacticsGame.Engine.Interfaces;
 using TacticsGame.Engine.Models;
-using TacticsGame.Source.UserInterface;
 using TacticsGame.Engine.Models.UIElements;
-
+using TacticsGame.Source.UserInterface.Buttons;
 
 namespace TacticsGame.Source.Scenes
 {

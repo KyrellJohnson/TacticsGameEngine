@@ -11,6 +11,8 @@ namespace TacticsGame.Source.Scenes
         TilemapManager tileMap;
         LevelManager levelManager;
         Camera2D camera;
+        float CameraZoomLastFrame;
+        Vector2 CameraOffsetLastFrame;
 
         public MainGame()
         {
@@ -26,23 +28,36 @@ namespace TacticsGame.Source.Scenes
             camera = new Camera2D();
             camera.offset = Vector2.Zero;
             camera.zoom = 1f;
+
         }
 
         public void Draw()
         {
+            //Raylib.DrawText($"Selected Unit: {camera.target.ToString()}", 40, 280, 20, Color.RED);
+
             Raylib.BeginMode2D(camera);
-            tileMap.Draw();
+
             
+            tileMap.Draw();
+            levelManager.Draw();
+            
+
+
             Vector2 mouseWorldPos = Raylib.GetScreenToWorld2D(Game.inputManager.mousePosition, camera);
 
             Raylib.DrawCircle((int)mouseWorldPos.X,  (int)mouseWorldPos.Y, 9f, Color.VIOLET);
             Raylib.DrawCircle((int)mouseWorldPos.X, (int)mouseWorldPos.Y, 4.5f, Color.WHITE);
             Raylib.DrawText($"POS: {(int)mouseWorldPos.X} | {(int)mouseWorldPos.Y}", 250, 250, 20, Color.RED);
+
             Raylib.EndMode2D();
+            
         }
 
         public void Update()
         {
+            levelManager.Update();
+
+
             // Handle Drag Camera Movement
             if(Game.inputManager.RIGHT_CLICK_LAST_FRAME)
             {
@@ -79,7 +94,7 @@ namespace TacticsGame.Source.Scenes
             }
 
             tileMap.camera = camera;
-
+            levelManager.camera = camera;
         }
     }
 }

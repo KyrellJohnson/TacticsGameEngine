@@ -9,14 +9,17 @@ namespace TacticsGame.Source.Entities.Models
 {
     public class PlayerUnit
     {
-        string Name { get; set; }
-        string PlayerSpriteSrc { get; set; }
-        List<IntVector2> Movement { get; set; }
+        public string Name { get; set; }
+        public string PlayerSpriteSrc { get; set; }
+        public SpriteSize SpriteSize { get; set; }
+        public IntVector2 PlayerPosition { get; set; }
+        public List<IntVector2> Movement { get; set; }
 
-        public PlayerUnit()
+        public PlayerUnit(string name, SpriteSize spriteSize)
         {
-            Name = "";
-            PlayerSpriteSrc = "../../../Assets/Player_Sprite.png";
+            Name = name;
+            SpriteSize = spriteSize;
+            PlayerSpriteSrc = "../../../Assets/Sprites/Player_Sprite.png";
             Movement = new List<IntVector2>();
             Movement.Add(new IntVector2(0, 1));
             Movement.Add(new IntVector2(0, 2));
@@ -30,7 +33,18 @@ namespace TacticsGame.Source.Entities.Models
             Movement.Add(new IntVector2(-1, 1));
             Movement.Add(new IntVector2(-1, -1));
             Movement.Add(new IntVector2(1, -1));
+        }
+    }
 
+    public struct SpriteSize
+    {
+        public int X;
+        public int Y;
+
+        public SpriteSize(int X, int Y)
+        {
+            this.X = X;
+            this.Y = Y;
         }
     }
 }

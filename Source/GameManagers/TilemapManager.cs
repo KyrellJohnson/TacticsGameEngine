@@ -2,6 +2,7 @@
 using TiledCS;
 using Raylib_cs;
 using TacticsGame.Engine.Utilities;
+using TacticsGame.Engine.Models;
 
 namespace TacticsGame.Source.GameManagers
 {
@@ -16,9 +17,12 @@ namespace TacticsGame.Source.GameManagers
         private TiledLayer collisionLayer;
         private TiledLayer spawnPointLayer;
 
+        public static List<Vector2> spawnPoints = new List<Vector2>();
+        public List<Vector2> colliderPositions = new List<Vector2>();
+
         private System.Drawing.Rectangle? debugRect;
         private Rectangle? debugSelectRect;
-        public Camera2D camera;
+        public  Camera2D camera;
 
         public void Initalize(string tilemapSrc, string tilesetTextureSrc, string collisionLayerName, string tilesetSrc = "../../../Assets/Tilesets/")
         {
@@ -28,6 +32,7 @@ namespace TacticsGame.Source.GameManagers
             tilesetTexture = Raylib.LoadTexture(tilesetTextureSrc);
             collisionLayer = map.Layers.First(layer => layer.name == collisionLayerName);
             spawnPointLayer = map.Layers.First(layer => layer.name == "SpawnPoints" && layer.type == TiledLayerType.ObjectLayer);
+            GetSpawnPoints();
         }
 
         public void Draw()
@@ -49,9 +54,20 @@ namespace TacticsGame.Source.GameManagers
             //}
         }
 
+        public void GetSpawnPoints()
+        {
+            foreach(var obj in spawnPointLayer.objects)
+            {
+                spawnPoints.Add(new Vector2(obj.x, obj.y));
+            }
+        }
+
         public void DrawTileMap()
         {
             if (tileLayers == null) return;
+            colliderPositions.Clear();
+
+
             //TODO: Draw
             foreach (var layer in tileLayers)
             {
@@ -107,6 +123,11 @@ namespace TacticsGame.Source.GameManagers
                         if (MathUtils.RectangleContainsPoint(dest, mousePos) && layer == collisionLayer)
                         {
                             debugRect = new System.Drawing.Rectangle((int)dest.x, (int)dest.y, (int)dest.width, (int)dest.height); ;
+                        }
+
+                        if(layer == collisionLayer)
+                        {
+                            colliderPositions.Add(new Vector2(rect.x, rect.y));
                         }
 
                     }

@@ -15,6 +15,12 @@ namespace TacticsGame.Engine.Models
 
         }
 
+        public IntVector2(float X, float Y)
+        {
+            this.X = (int)X;
+            this.Y = (int)Y;
+        }
+
         public IntVector2(Vector2 vector2)
         {
             X = (int)vector2.X;

@@ -1,7 +1,6 @@
 ﻿using Raylib_cs;
 using TacticsGame.Engine.Interfaces;
 using TacticsGame.Engine.Utilities;
-using TacticsGame.Source.UserInterface;
 
 namespace TacticsGame.Engine.Models.UIElements
 {

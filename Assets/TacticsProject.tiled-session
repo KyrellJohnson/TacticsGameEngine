@@ -9,10 +9,10 @@
     "fileStates": {
         "Tilemaps/Level_Main.tmx": {
             "scale": 0.8681,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 557.5394539799562,
-                "y": 570.7867757170833
+                "x": 551.7797488768575,
+                "y": 568.4828936758438
             }
         },
         "Tilesets/SciFi_Tileset.tsx": {
@@ -31,8 +31,8 @@
     "project": "TacticsProject.tiled-project",
     "property.type": "object",
     "recentFiles": [
-        "Tilesets/SciFi_Tileset.tsx",
-        "Tilemaps/Level_Main.tmx"
+        "Tilemaps/Level_Main.tmx",
+        "Tilesets/SciFi_Tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

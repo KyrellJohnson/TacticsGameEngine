@@ -13,21 +13,27 @@ namespace TacticsGame.Engine.Utilities
             return false;
         }
 
-        public static bool RectangleContainsPoint(Rectangle rectangle, IntVector2 mousePos)
+        public static bool RectangleContainsPoint(Rectangle rectangle, IntVector2 position)
         {
 
-            return rectangle.Contains(new Point(mousePos.X, mousePos.Y));
+            return rectangle.Contains(new Point(position.X, position.Y));
         }
 
-        public static bool RectangleContainsPoint(Rectangle rectangle, Vector2 mousePos)
-        {
-            return rectangle.Contains(new Point((int)mousePos.X, (int)mousePos.Y));
-        }
-
-        public static bool RectangleContainsPoint(Raylib_cs.Rectangle rectangle, Vector2 mousePos)
+        public static bool RectangleContainsPoint(Raylib_cs.Rectangle rectangle, IntVector2 position)
         {
             Rectangle rec = new Rectangle((int)rectangle.x, (int)rectangle.y, (int)rectangle.width, (int)rectangle.height);
-            return rec.Contains(new Point((int)mousePos.X, (int)mousePos.Y));
+            return rec.Contains(new Point(position.X, position.Y));
+        }
+
+        public static bool RectangleContainsPoint(Rectangle rectangle, Vector2 position)
+        {
+            return rectangle.Contains(new Point((int)position.X, (int)position.Y));
+        }
+
+        public static bool RectangleContainsPoint(Raylib_cs.Rectangle rectangle, Vector2 position)
+        {
+            Rectangle rec = new Rectangle((int)rectangle.x, (int)rectangle.y, (int)rectangle.width, (int)rectangle.height);
+            return rec.Contains(new Point((int)position.X, (int)position.Y));
         }
 
     }

@@ -2,7 +2,7 @@
 using TacticsGame.Engine.Models;
 using TacticsGame.Engine.Models.UIElements;
 
-namespace TacticsGame.Source.UserInterface
+namespace TacticsGame.Source.UserInterface.Buttons
 {
     public class GameStartButton : UIButton
     {

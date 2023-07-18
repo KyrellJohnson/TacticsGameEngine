@@ -47,6 +47,8 @@ namespace TacticsGame
                 Raylib.DrawText($"RIGHT CLICK: {inputManager.RIGHT_CLICK_LAST_FRAME.ToString()}", 40, 200, 20, Color.RED);
                 Raylib.DrawText($"LEFT CLICK: {inputManager.LEFT_CLICK_LAST_FRAME.ToString()}", 40, 240, 20, Color.RED);
 
+                
+
 #endif
                 Raylib.EndDrawing();
                 //**
