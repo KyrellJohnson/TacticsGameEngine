@@ -49,5 +49,27 @@ namespace TacticsGame.Engine.Utilities
             return false;
         }
 
+        public static bool PointInListOfPoint(Vector2 point, List<Vector2> positions)
+        {
+            foreach(var postion in positions)
+            {
+                if(postion == point) return true;
+            }
+
+            return false;
+        }
+
+        public static bool PointInListOfPoint(IntVector2 point, List<Vector2> positions)
+        {
+            Vector2 checkPosition = new Vector2(point.X, point.Y);
+
+            foreach (var postion in positions)
+            {
+                if (postion == checkPosition) return true;
+            }
+
+            return false;
+        }
+
     }
 }

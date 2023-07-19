@@ -29,7 +29,7 @@
         "Tilemaps/Level_Main.tmx"
     ],
     "project": "TacticsProject.tiled-project",
-    "property.type": "object",
+    "property.type": "color",
     "recentFiles": [
         "Tilemaps/Level_Main.tmx",
         "Tilesets/SciFi_Tileset.tsx"

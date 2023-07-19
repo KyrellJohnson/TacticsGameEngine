@@ -61,7 +61,7 @@ namespace TacticsGame.Source.GameManagers
                     }
                     else
                     {
-                        rep.Add((short)0);
+                        rep.Add((short)1);
                     }
                 }
 
@@ -76,7 +76,7 @@ namespace TacticsGame.Source.GameManagers
             {
                 for(int j =0;j < lists[0].Count; j++)
                 {
-                    grid[i,j] = lists[i][j];
+                    grid[j,i] = lists[j][i];
                 }
             }
 

@@ -23,7 +23,7 @@ namespace TacticsGame.Source.Scenes
         public void Initalize()
         {
             tileMap.Initalize(tilemapSrc: "../../../Assets/Tilemaps/Level_Main.tmx", tilesetTextureSrc: "../../../Assets/tileset x1.png", collisionLayerName: "Walls");
-            levelManager.Initalize(spawnPoints: tileMap.spawnPoints);
+            levelManager.Initalize(spawnPoints: tileMap.spawnPoints, grid: tileMap.grid, colliderPositions: tileMap.colliderPositions);
 
             camera = new Camera2D();
             camera.offset = Vector2.Zero;
@@ -34,10 +34,11 @@ namespace TacticsGame.Source.Scenes
         public void Draw()
         {
             //Raylib.DrawText($"Selected Unit: {camera.target.ToString()}", 40, 280, 20, Color.RED);
-
+            Raylib.DrawText($"MOUSE POS: {Game.inputManager.mousePosition.X},{Game.inputManager.mousePosition.Y}", 500,500,20,Color.RED);
             Raylib.BeginMode2D(camera);
+            Vector2 mouseWorldPos = Raylib.GetScreenToWorld2D(Game.inputManager.mousePosition, camera);
+            Raylib.DrawText($"MOUSE POS2: {mouseWorldPos.X},{mouseWorldPos.Y}", 500, 200, 20, Color.RED);
 
-            
             tileMap.Draw();
             levelManager.Draw();
             
@@ -49,8 +50,8 @@ namespace TacticsGame.Source.Scenes
 
         public void Update()
         {
-            levelManager.Update();
             levelManager.colliderPos = tileMap.colliderPositions;
+            levelManager.Update();
 
             // function to handle drag and zoom events
             HandleCameraMovement();
