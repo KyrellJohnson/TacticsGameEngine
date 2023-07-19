@@ -14,18 +14,27 @@ namespace TacticsGame.Source.GameManagers
 {
     public class LevelManager
     {
-        PlayerUnit[] playerUnits;
-        public PlayerUnit selectedUnit;
+        PlayerUnit[]? playerUnits;
+        PlayerUnit selectedUnit;
+
         Dictionary<Vector2, PlayerUnit> playerPositions;
+        List<Vector2> spawnPoints;
+        public List<Vector2> colliderPos;
 
         public Camera2D camera;
+
         public LevelManager()
         {
+            colliderPos = new List<Vector2>();
+            spawnPoints = new List<Vector2>();
             playerPositions = new Dictionary<Vector2, PlayerUnit>();
+            selectedUnit = new PlayerUnit();
         }
 
-        public void Initalize()
+        public void Initalize(List<Vector2> spawnPoints)
         {
+
+            this.spawnPoints = spawnPoints;
 
             // Get All Current Player Units
             playerUnits = new PlayerUnit[] {
@@ -41,10 +50,10 @@ namespace TacticsGame.Source.GameManagers
 
                 // find a random spanPoint
                 Random rand = new Random();
-                int randIndex = rand.Next(TilemapManager.spawnPoints.Count);
+                int randIndex = rand.Next(spawnPoints.Count);
 
-                playerPositions.Add(TilemapManager.spawnPoints.ElementAt(randIndex), player);
-                TilemapManager.spawnPoints.RemoveAt(randIndex);
+                playerPositions.Add(spawnPoints.ElementAt(randIndex), player);
+                spawnPoints.RemoveAt(randIndex);
             }
 
             selectedUnit = playerUnits[0];
@@ -97,7 +106,7 @@ namespace TacticsGame.Source.GameManagers
         {
 
             Vector2[] currentPlayerPositions = playerPositions.Keys.ToArray();
-            Vector2[] colliderPositions = TilemapManager.colliderPositions.ToArray();
+            Vector2[] colliderPositions = colliderPos.ToArray();
 
             for (int i = 0; i < selectedUnit.Movement.Count; i++)
             {

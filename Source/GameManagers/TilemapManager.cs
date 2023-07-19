@@ -11,21 +11,21 @@ namespace TacticsGame.Source.GameManagers
     {
         public static TiledMap map = new TiledMap();
 
-        public static Dictionary<int, TiledTileset> tilesets = new Dictionary<int, TiledTileset>();
-        public static IEnumerable<TiledLayer>? tileLayers;
+        public Dictionary<int, TiledTileset> tilesets = new Dictionary<int, TiledTileset>();
+        public IEnumerable<TiledLayer>? tileLayers;
 
         private Texture2D tilesetTexture;
 
-        private TiledLayer collisionLayer;
-        private TiledLayer spawnPointLayer;
+        private TiledLayer? collisionLayer;
+        private TiledLayer? spawnPointLayer;
 
-        public static List<Vector2> spawnPoints = new List<Vector2>();
-        public static List<Vector2> colliderPositions = new List<Vector2>();
+        public List<Vector2> spawnPoints = new List<Vector2>();
+        public List<Vector2> colliderPositions = new List<Vector2>();
 
         private System.Drawing.Rectangle? debugRect;
         private Rectangle? debugSelectRect;
         public Camera2D camera;
-        List<List<short>> lists = new List<List<short>>(); /////https://www.techiedelight.com/convert-a-list-of-lists-to-a-2d-array-in-csharp/
+        public List<List<short>> lists; /////https://www.techiedelight.com/convert-a-list-of-lists-to-a-2d-array-in-csharp/
 
         public short[,] grid;
 
@@ -44,11 +44,10 @@ namespace TacticsGame.Source.GameManagers
             GetSpawnPoints();
 
             List<short> rep = new List<short>();
-
+            lists = new List<List<short>>();
 
             for (int y = 0; y < collisionLayer.height; y++)
             {
-                rep.Clear();
 
                 for (int x = 0; x < collisionLayer.width; x++)
                 {
@@ -57,25 +56,29 @@ namespace TacticsGame.Source.GameManagers
                                                           // Gid 0 is used to tell there is no tile set
                     if (gid == 0)
                     {
-                        rep.Add((short)321);
-                        Console.Write("!"+x);
-                        Console.WriteLine("\t " + y);
+                        rep.Add((short)1);
                         continue;
                     }
                     else
                     {
-                        Console.Write(x);
-                        Console.WriteLine("\t " + y);
-                        rep.Add((short)123);
+                        rep.Add((short)0);
                     }
-
-                    
                 }
-                lists.Add(rep);
+
+                var copyList = new List<short>(rep);
+                lists.Add(copyList);
+                rep.Clear();
             }
 
+            grid = new short[lists.Count, lists[0].Count];
 
-            Console.WriteLine(lists.ElementAt(10).ElementAt(10));
+            for(int i = 0; i < lists.Count; i++)
+            {
+                for(int j =0;j < lists[0].Count; j++)
+                {
+                    grid[i,j] = lists[i][j];
+                }
+            }
 
         }
 

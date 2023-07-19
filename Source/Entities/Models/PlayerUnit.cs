@@ -35,6 +35,10 @@ namespace TacticsGame.Source.Entities.Models
             Movement.Add(new IntVector2(-1, -1));
             Movement.Add(new IntVector2(1, -1));
         }
+
+        public PlayerUnit()
+        {
+        }
     }
 
     public struct SpriteSize

@@ -23,7 +23,7 @@ namespace TacticsGame.Source.Scenes
         public void Initalize()
         {
             tileMap.Initalize(tilemapSrc: "../../../Assets/Tilemaps/Level_Main.tmx", tilesetTextureSrc: "../../../Assets/tileset x1.png", collisionLayerName: "Walls");
-            levelManager.Initalize();
+            levelManager.Initalize(spawnPoints: tileMap.spawnPoints);
 
             camera = new Camera2D();
             camera.offset = Vector2.Zero;
@@ -42,13 +42,6 @@ namespace TacticsGame.Source.Scenes
             levelManager.Draw();
             
 
-
-            Vector2 mouseWorldPos = Raylib.GetScreenToWorld2D(Game.inputManager.mousePosition, camera);
-
-            Raylib.DrawCircle((int)mouseWorldPos.X,  (int)mouseWorldPos.Y, 9f, Color.VIOLET);
-            Raylib.DrawCircle((int)mouseWorldPos.X, (int)mouseWorldPos.Y, 4.5f, Color.WHITE);
-            Raylib.DrawText($"POS: {(int)mouseWorldPos.X} | {(int)mouseWorldPos.Y}", 250, 250, 20, Color.RED);
-
             Raylib.EndMode2D();
 
 
@@ -57,10 +50,20 @@ namespace TacticsGame.Source.Scenes
         public void Update()
         {
             levelManager.Update();
+            levelManager.colliderPos = tileMap.colliderPositions;
 
+            // function to handle drag and zoom events
+            HandleCameraMovement();
 
+            // Update Camera Object in tilemap and levelmanager classes
+            tileMap.camera = camera;
+            levelManager.camera = camera;
+        }
+
+        void HandleCameraMovement()
+        {
             // Handle Drag Camera Movement
-            if(Game.inputManager.RIGHT_CLICK_LAST_FRAME)
+            if (Game.inputManager.RIGHT_CLICK_LAST_FRAME)
             {
                 Vector2 delta = Game.inputManager.mouseDelta;
                 delta = Raymath.Vector2Scale(delta, -1f / camera.zoom);
@@ -87,15 +90,12 @@ namespace TacticsGame.Source.Scenes
                 const float maxZoom = 2.5f;
 
                 camera.zoom += (wheel * zoomIncrement);
-                
 
-                if(camera.zoom < zoomIncrement || camera.zoom > maxZoom)
+
+                if (camera.zoom < zoomIncrement || camera.zoom > maxZoom)
                     camera.zoom -= (wheel * zoomIncrement);
 
             }
-
-            tileMap.camera = camera;
-            levelManager.camera = camera;
         }
     }
 }

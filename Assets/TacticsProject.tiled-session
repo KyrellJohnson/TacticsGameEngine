@@ -8,11 +8,11 @@
     ],
     "fileStates": {
         "Tilemaps/Level_Main.tmx": {
-            "scale": 1,
+            "scale": 0.86,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 613,
-                "y": 694.5
+                "x": 551.1627906976745,
+                "y": 568.0232558139535
             }
         },
         "Tilesets/SciFi_Tileset.tsx": {
