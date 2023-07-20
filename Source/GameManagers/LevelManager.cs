@@ -94,7 +94,7 @@ namespace TacticsGame.Source.GameManagers
                 var b = (int)(dest.x / selectedUnit.SpriteSize.Y);
 
 
-                gridCopy[(int)(dest.y / selectedUnit.SpriteSize.X), (int)dest.x / selectedUnit.SpriteSize.Y] = 0;
+                gridCopy[(int)(dest.x / selectedUnit.SpriteSize.X), (int)dest.y / selectedUnit.SpriteSize.Y] = 0;
             }
 
             for (int i = 0; i < selectedUnit.Movement.Count; i++)
@@ -109,7 +109,7 @@ namespace TacticsGame.Source.GameManagers
 
                 if (!MathUtils.PointInListOfPoint(new Vector2(selectedUnit.PlayerPosition.X + (selectedUnit.Movement.ElementAt(i).X * selectedUnit.SpriteSize.X), selectedUnit.PlayerPosition.Y + (selectedUnit.Movement.ElementAt(i).Y * selectedUnit.SpriteSize.Y)), colliderPos))
                 {
-                    gridCopy[arrPos1 / selectedUnit.SpriteSize.X, arrPos2 / selectedUnit.SpriteSize.Y] = 0;
+                    gridCopy[arrPos2 / selectedUnit.SpriteSize.X, arrPos1 / selectedUnit.SpriteSize.Y] = 0;
 
                 }
 
@@ -145,21 +145,21 @@ namespace TacticsGame.Source.GameManagers
                 Vector2 s = new Vector2((int)moveTile.x, (int)moveTile.y);
                 Vector2 e = new Vector2(selectedUnit.PlayerPosition.X, selectedUnit.PlayerPosition.Y);
 
-
-                Position[] nPoints = Pathfinding.FindPath(gridCopy,start: s, end: e);
+                Console.WriteLine(Raylib.GetScreenToWorld2D(s, camera));
+                System.Drawing.Point[] nPoints = Pathfinding.FindPath(gridCopy,start: s, end: e);
 
                 if(nPoints == null)
                 {
                     Console.WriteLine('0');
                 }
 
-                if (!MathUtils.RectangleContainsListOfPoints(moveTile, currentPlayerPositions) && !MathUtils.RectangleContainsListOfPoints(moveTile, colliderPositions) && nPoints != null)
+                if (!MathUtils.RectangleContainsListOfPoints(moveTile, currentPlayerPositions) && !MathUtils.RectangleContainsListOfPoints(moveTile, colliderPositions) && nPoints.Length > 0)
                 {
                     Raylib.DrawTexturePro(Game.textureManager.movementTileSprite, src, moveTile, Vector2.Zero, 0f, Color.WHITE);
                 }
                 else
                 {
-                    //Raylib.DrawTexturePro(Game.textureManager.nonMovementTileSprite, src, moveTile, Vector2.Zero, 0f, Color.WHITE);
+                    Raylib.DrawTexturePro(Game.textureManager.nonMovementTileSprite, src, moveTile, Vector2.Zero, 0f, Color.WHITE);
 
                 }
 
@@ -167,7 +167,7 @@ namespace TacticsGame.Source.GameManagers
                 {
                     foreach (var n in nPoints)
                     {
-                        Raylib.DrawRectangle((int)n.Row * 32, (int)n.Column * 32, (int)moveTile.width, (int)moveTile.height, Color.PINK);
+                       // Raylib.DrawRectangle((int)n.X * 32, (int)n.Y * 32, (int)moveTile.width, (int)moveTile.height, Color.PINK);
                     }
 
                 }
@@ -175,14 +175,13 @@ namespace TacticsGame.Source.GameManagers
 
             }
 
-            //for (int i = 0; i < gridCopy.GetLength(0); i++)
-            //{
-            //    for (int j = 0; j < gridCopy.GetLength(1); j++)
-            //    {
-            //        Console.Write(gridCopy[i, j] + " ");
-            //    }
-            //    Console.WriteLine();
-            //}
+            for (int i = 0; i < gridCopy.GetLength(0); i++)
+            {
+                for (int j = 0; j < gridCopy.GetLength(1); j++)
+                {
+                    Raylib.DrawText($"{gridCopy[i,j]}", i * 32, j * 32, 10, Color.GOLD);
+                }
+            }
 
 
         }
